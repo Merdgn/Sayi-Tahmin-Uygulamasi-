@@ -4,9 +4,9 @@ import GameStartScreen from './screens/GameStartScreen';
 
 export default function App() {
   return (
-    <View>
-      <Text>GameStartScreen</Text>
-    </View>    
+    <View style={{ flex: 1 }}>
+      <GameStartScreen />
+    </View>
   );
 }
 
