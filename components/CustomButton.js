@@ -1,23 +1,28 @@
-import { StyleSheet, Text, Pressable } from 'react-native';
+import { StyleSheet, Text, Pressable, View } from 'react-native';
 import React from 'react';
 
 export default function CustomButton({ children, onPress }) {
   return (
-    <Pressable onPress={onPress} style={styles.button}>
-      <Text style={styles.text}>{children}</Text>
-    </Pressable>
+    <View style={styles.buttonContainer}>
+      <Pressable stytle={({ pressed }) => pressed ? [styles.buttonInnerContainer, styles.pressed] : styles.buttonInnerContainer}
+        onPress={onPress}>
+        <Text style={styles.buttonText}>{children}</Text>
+      </Pressable>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
-  button: {
-    backgroundColor: '#72063c',
-    padding: 12,
-    marginVertical: 5,
-    borderRadius: 10,
-  },
-  text: {
-    color: 'white',
-    fontWeight: 'bold',
-  },
+    buttonContainer: {
+      margin: 5,
+    },
+    buttonInnerContainer: {
+      paddingVertical: 8,
+
+    },
+    buttonText: {
+      textAlign: 'center',
+      color: 'white',
+      fontSize: 20,
+    },
 });

@@ -2,14 +2,27 @@ import { StyleSheet, Text, View, TextInput } from 'react-native'
 import React from 'react'
 import CustomButton from '../components/CustomButton';
 
-export default function GameStartScreen() {
+export default function GameStartScreen(onPress) {
+  function resetHandler() {}
+  
+  function confirmHandler() {}
+
   return (
     <View style={styles.container}>
       <Text>Sayı Tahmin Uygulaması</Text>
       <View style={styles.card}>
-        <TextInput style={styles.input}/>
-        <CustomButton>Temizle</CustomButton>
-        <CustomButton>Onayla</CustomButton>
+        <TextInput style={styles.input}
+        keyboardType="number-pad"
+        maxLength={2}
+        />
+        <View style={styles.buttonsContainer}>
+          <View style={styles.buttonContainer}>
+          <CustomButton onPress={resetHandler}>Temizle</CustomButton>
+          </View >
+        <View style={styles.buttonContainer}>
+          <CustomButton onPress={confirmHandler}>Onayla</CustomButton>
+          </View>
+        </View>        
       </View>
     </View>
   );
@@ -23,7 +36,7 @@ const styles = StyleSheet.create({
         padding: 20,
     },
     card: {
-        backgroundColor: 'white',
+        backgroundColor: 'orange',
         alignItems: 'center',
         justifyContent: 'center',
         padding: 16,
@@ -42,5 +55,14 @@ const styles = StyleSheet.create({
         height: 50,
         marginVertical: 10,
         fontSize: 35,
+        fontWeight: 'bold',
     },
-});
+    buttonsContainer: {
+        flexDirection: 'row',
+    },
+    buttonContainer: {
+        flex: 1,
+        alignItems: 'center',
+    },
+
+}); 
