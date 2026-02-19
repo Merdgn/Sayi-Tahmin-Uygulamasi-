@@ -4,8 +4,15 @@ import React from 'react';
 export default function CustomButton({ children, onPress }) {
   return (
     <View style={styles.buttonContainer}>
-      <Pressable stytle={({ pressed }) => pressed ? [styles.buttonInnerContainer, styles.pressed] : styles.buttonInnerContainer}
+      <Pressable 
+      stytle={({ pressed }) =>
+         pressed 
+      ? [styles.buttonInnerContainer, styles.
+        pressed] 
+        : styles.buttonInnerContainer}
+
         onPress={onPress}>
+          
         <Text style={styles.buttonText}>{children}</Text>
       </Pressable>
     </View>
