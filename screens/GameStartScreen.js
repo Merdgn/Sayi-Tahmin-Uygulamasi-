@@ -1,8 +1,9 @@
 import { StyleSheet, Text, View, TextInput, Alert } from 'react-native';
 import React, { useState } from 'react';
 import CustomButton from '../components/CustomButton';
+import Title from '../components/Title';
 
-export default function GameStartScreen() {
+export default function GameStartScreen({ onPress, onSendNumber }) {
   const [enteredNumber, setEnteredNumber] = useState('');
 
   function resetHandler() {
@@ -26,17 +27,17 @@ export default function GameStartScreen() {
       );
       return;
     }
-
-    console.log('Seçilen sayı:', chosenNumber);
+    onSendNumber(chosenNumber);
   }
 
   function numberHandler(text) {
+    //console.log(text);
     setEnteredNumber(text);
   }
 
   return (
     <View style={styles.container}>
-      <Text>Sayı Tahmin Uygulaması</Text>
+      <Title>Sayı Tahmin Uygulaması</Title>
 
       <View style={styles.card}>
         <TextInput
@@ -63,7 +64,7 @@ export default function GameStartScreen() {
       </View>
     </View>
   );
-}
+} 
 
 const styles = StyleSheet.create({
   container: {

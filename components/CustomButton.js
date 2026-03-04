@@ -5,7 +5,7 @@ export default function CustomButton({ children, onPress }) {
   return (
     <View style={styles.buttonContainer}>
       <Pressable 
-      stytle={({ pressed }) =>
+      style={({ pressed }) =>
          pressed 
       ? [styles.buttonInnerContainer, styles.
         pressed] 
