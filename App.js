@@ -22,14 +22,23 @@ function gameOverHandler(numberofGuess) {
   setGuessCounts(numberofGuess);
 }
 
+function startNewGameHandler() {
+  setUserNumber(null);
+  setGuessCounts(0);
+}
+
 let screen = <GameStartScreen onSendNumber={sendedNumberHandler} />;
 
 if (userNumber) {
-  screen = <GameScreen userNumber={userNumber} onGameOver ={gameOverHandler}/>;
+  screen = (
+  <GameScreen userNumber={userNumber} onGameOver ={gameOverHandler}/>
+  );
 }
 
 if (gameIsOver && userNumber) {
-  screen = <GameOverScreen roundsNumber={guessCounts} userNumber={userNumber} />;
+  screen = (
+  <GameOverScreen roundsNumber={guessCounts} userNumber={userNumber} onStartNewGame={startNewGameHandler} />
+  );
 }
 
   return (
