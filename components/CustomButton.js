@@ -7,7 +7,7 @@ export default function CustomButton({ children, onPress }) {
       <Pressable 
       style={({ pressed }) =>
          pressed 
-      ? [styles.buttonInnerContainer, styles.
+        ? [styles.buttonInnerContainer, styles.
         pressed] 
         : styles.buttonInnerContainer}
 
@@ -23,6 +23,7 @@ const styles = StyleSheet.create({
     buttonContainer: {
       margin: 5,
     },
+    
     buttonInnerContainer: {
       paddingVertical: 8,
 

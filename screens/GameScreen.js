@@ -3,6 +3,7 @@ import React, {useEffect, useState} from 'react'
 import Title from '../components/Title';
 import ComputerNumber from '../components/ComputerNumber';
 import CustomButton from '../components/CustomButton';
+import AntDesign from '@expo/vector-icons/AntDesign';
 
   let minNumber = 1;   
   let maxNumber = 100;
@@ -10,12 +11,18 @@ import CustomButton from '../components/CustomButton';
 export default function GameScreen({userNumber, onGameOver}) {
   const initialGuess=generateNumber(1,100,userNumber);
   const [currentGuess, setCurrentGuess] = useState(initialGuess);
+  const [guessCounts, setGuessCounts] = useState([initialGuess]);
 
   useEffect(() => {
    if(currentGuess === userNumber) {
-    onGameOver();
+    onGameOver(guessCounts.length);
    }
   }, [currentGuess, userNumber, onGameOver]); //dependency currentguess değiştiğinde useeffect içindeki bu kodu çalıştırır. usernumber değiştiğinde çalıştırır. ongameover değiştiğinde çalıştırır.
+
+useEffect(() => {
+  minNumber = 1;
+  maxNumber = 100;
+}, []); //dependency boş array olduğunda useeffect içindeki kod sadece bir kere çalışır. component ilk render edildiğinde çalışır.
 
   function nextGuessHandler(direction) {
 
@@ -33,33 +40,34 @@ export default function GameScreen({userNumber, onGameOver}) {
     }
     const newRandomNumber = generateNumber(minNumber, maxNumber, currentGuess);
     setCurrentGuess(newRandomNumber);
+    setGuessCounts(prevGuessCounts => [newRandomNumber, ...prevGuessCounts]);
   }
 
 
-  function generateNumber(min, max, exclude) 
-  {
-    const randomNumber = Math.floor(Math.random() * (max - min)) + min;
-    if (randomNumber === exclude) {
-      return randomNumber(min, max, exclude);
-    } else {
-      return randomNumber;      
-    }
+function generateNumber(min, max, exclude) {
+  const randomNumber = Math.floor(Math.random() * (max - min)) + min;
+
+  if (randomNumber === exclude) {
+    return generateNumber(min, max, exclude); 
+  } else {
+    return randomNumber;      
   }
+}
     
   return (
     <View style={styles.container}>
       <Title>Bilgisayar Tahmini</Title>
       <ComputerNumber>{currentGuess}</ComputerNumber>
-      <View>
-        <Text>Altında mı üstünde mi?</Text>
-        <View>
+      <View style={styles.card}>
+        <Text style={styles.title}>Altında mı üstünde mi?</Text>
+        <View style={styles.buttonsContainer}>
           <CustomButton onPress={nextGuessHandler.bind 
             (this, 'lower')}>
-              -
+              <AntDesign name="minus" size={24} color="white" />
               </CustomButton>
           <CustomButton onPress={nextGuessHandler.bind 
             (this, 'greater')}>
-              +
+              <AntDesign name="plus-circle" size={24} color="white" />
               </CustomButton>
         </View>
       </View>
@@ -71,5 +79,29 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 30,
+  },
+
+  buttonsContainer: {
+    flexDirection: 'row',
+  },
+
+  title: {
+    color: 'white',
+    fontSize: 25,
+    marginBottom: 15,
+  },
+
+  card: {
+    backgroundColor: 'orange',
+    padding: 16,
+    marginTop: 20,
+    elevation: 4,
+    shadowColor: 'black',
+    shadowOffset: { width: 0, height: 2 },  
+    shadowRadius: 6,
+    shadowOpacity: 0.25,
+    borderRadius: 20,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
 });
