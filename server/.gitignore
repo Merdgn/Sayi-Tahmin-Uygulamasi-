@@ -1,0 +1,9 @@
+# Bağımlılıklar
+node_modules/
+
+# Hassas Bilgiler (Veritabanı şifrelerin burada!)
+.env
+
+# Loglar ve Geçici Dosyalar
+npm-debug.log*
+.DS_Store
